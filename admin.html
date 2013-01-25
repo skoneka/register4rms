@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <a href='/logout'>Logout</a>
+  <h1>Listing registred attendees.</h1>
+{% end %}
+
+{% block content %}
+
+<ul>
+Name Surname Email
+ {% for a in attendees %}
+     <li>{{ a['name'] }}  {{ a['surname'] }} {{ a['email'] }}</li>
+ {% end %}
+</ul>
+{% end %}

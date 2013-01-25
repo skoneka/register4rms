@@ -1,0 +1,29 @@
+register4rms
+
+*Installation*
+
+  virtualenv venv
+  . venv/bin/activate
+  pip install tornado
+  pip install pymongo 
+  # install mongodb from http://www.mongodb.org/ and start it  with
+  mongod
+  
+*Configuration
+
+   # remember to set cookie_secret in server.py to a random value
+   
+   # add an admin user
+   ./add_user.py username password
+   
+*Start*
+
+  ./server.py 8000
+  
+*Usage*
+
+  localhost:8000
+  localhost:8000/admin
+  
+# webpage: https://github.com/skoneka/register4rms
+# author: Artur Skonecki

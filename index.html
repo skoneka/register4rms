@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1>Registration form for Richard Stallman talks. Warsaw, 13 March 2013.</h1>
+Registration is optional.
+{% end %}
+
+{% block content %}
+<form action='register' method='post'>
+Name: <input type='text' name='name'><BR>
+Surname: <input type='text' name='surname'><BR>
+Email: <input type='text' name='email'><BR>
+<input type='submit' value='Register'>
+</form>
+{% end %}
+
+{% block footer %}
+
+{% end %}
+
