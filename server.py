@@ -59,17 +59,20 @@ class LoginHandler(MainHandler):
     self.render('login.html')
 
   def post(self):
-    username = self.get_argument("username")
-    password = self.get_argument("pass")
-    users = db.users.find({'username': username})
     try:
+      username = self.get_argument("username")
+      password = self.get_argument("pass")
+    except:
+      self.write('<br> Incomplete fields')
+      
+    try:
+      users = db.users.find({'username': username})
       user = next(users)
+      if user['username'] == username and util.check_password(password, user['pass']):
+        self.set_secure_cookie("user", self.get_argument("username"))
+        self.redirect("/admin")
     except StopIteration:
-      self.redirect("/")
-    #ipdb.set_trace()
-    if user['username'] == username and util.check_password(password, user['pass']):
-      self.set_secure_cookie("user", self.get_argument("username"))
-    self.redirect("/admin")
+      self.redirect("/login")
 
 def main():
   application = tornado.web.Application (
