@@ -2,6 +2,7 @@
 # register4rms
 # webpage: https://github.com/skoneka/register4rms
 # author: Artur Skonecki
+# author: Barnaba Turek
 
 import sys
 import tornado
