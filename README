@@ -16,6 +16,10 @@ register4rms
    # remember to set captchakey in lib/captcha.py to a random value (16 bytes)
    captchakey = "SPAMMERSBESHOT!!";
    
+   # `locate DejaVuSans` and set captchafont in lib/captcha.py
+   captchafont = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'
+
+   
    # add an admin user
    ./add_user.py username password
    
