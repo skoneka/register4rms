@@ -9,6 +9,7 @@ from tornado import web
 from tornado import ioloop
 import tornado.httpserver
 import util
+import os
 
 from pymongo import MongoClient
 
@@ -28,14 +29,16 @@ class CaptchaException(Exception):
 class MainHandler(web.RequestHandler):
   def get(self):
     captchaId = captcha.GenerateID()
-    captcha_html = '''
-      <img src="%s" />
-      What is the number: <input type="text" name="fUserField" />
+    captcha_img_html = '''
+      <img class="controls" src="%s" />
+    '''% ("/a/captcha/?id="+captchaId)
+    captcha_form_html = '''
+      <input type="text" name="fUserField" class="controls" />
       <input type="hidden" name="fCaptchaH" value="%s" />
-      ''' % ("/a/captcha/?id="+captchaId, captchaId)
+      ''' % ( captchaId)
     cImg = captcha.GenerateImage(captchaId)
     last_img = cImg
-    self.render('index.html', captcha = captcha_html)
+    self.render('index.html', captcha_img = captcha_img_html, captcha_form = captcha_form_html)
 
   def post(self):
     try:
@@ -117,7 +120,8 @@ def main():
     ],
     debug=True,
     cookie_secret='testSAKDFJAWIEOJVNMMLREPOQRIUIUFAHJVLKGJHGLLADF',
-    login_url= "/login"
+    login_url= "/login",
+    static_path = os.path.join(os.path.dirname(__file__), "static")
   )
   http_server = tornado.httpserver.HTTPServer(application)
 

@@ -1,22 +1,127 @@
 {% extends "base.html" %}
 
+
+{% block test %}
+lol
+{% end %}
+
 {% block header %}
-<h1>Registration form for Richard Stallman talks. Warsaw, 13 March 2013.</h1>
-Registration is optional.
+<div class="row">
+  <div class="span10 offset2">
+    <h1> Richard Stallman <br />
+      Free Software and Your Freedom</h1>
+  </div>
+</div>
 {% end %}
 
 {% block content %}
-<form action='/' method='post'>
-Name: <input type='text' name='name'><BR>
-Surname: <input type='text' name='surname'><BR>
-Email: <input type='text' name='email'><BR>
-{% raw captcha %}
-<br>
-<input type='submit' value='Register'>
-</form>
+
+<div class="row" id="container">
+  <div class="main-page-container offset2 span10">
+    <div class="row">
+      <aside class="span3">
+      <img src="{{ static_url("rms.jpg") }}" alt="Picture of Richard Stallman" />
+      </aside>
+
+      <div class="span7 tabbable main-page-content">
+        <nav>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#main" data-toggle="tab">Info</a></li>
+          <li><a href="#bio" data-toggle="tab">Bio</a></li>
+          <li><a href="#lecture" data-toggle="tab">Lecture</a></li>
+          <li><a href="#registration" data-toggle="tab">Register!</a></li>
+        </ul>
+        </nav>
+
+        <div class="tab-content">
+          <div id="main" class="tab-pane active">
+            <a name="main"></a>
+            <h2> Info </h2>
+            <p>We are happy to announce, that Richard Stallman, the President of Free Software Foundation, pioneer of copyleft and free software, known for his work in <b>GNU</b>, <b>Emacs</b> and <b>GCC</b> visits Poland.
+              During his visit he's going to give a prelection on the topic of „Free Software and Your Freedom” at <b>Warsaw University Of Technology</b>.
+            </p>
+            <p>
+              The prelection will take place in <b>Lorem Ipsum PW</b> at <time datetime="2013-03-12T13:37+01:00">12.03.2013 13:37</time>.
+              <!--TODO: prawidłowa data i miejsce-->
+            </p>
+          </div>
+
+          <div id="bio" class="tab-pane">
+            <a name="bio"></a>
+            <h2> Bio </h2>
+            <p>Richard Matthew Stallman (born March 16, 1953), often shortened to rms, is an American software freedom activist and computer programmer. He campaigns for the freedom to use, study, distribute and modify software; software that ensures these freedoms legally (via its license) is termed free software. Stallman opposes proprietary software which takes away a user's rights to exercise these freedoms through restrictive software license agreements, non-disclosure agreements, activation keys, dongles, copy restriction, proprietary formats and binary executables without source code and thus forces its users into a role of dependence on a company that seeks to control and monopolize the users and the market via these restrictions.</p>
+
+            <p>In September 1983, Stallman launched the GNU Project to create a Unix-like computer operating system composed entirely of free software. He has been the GNU project's lead architect and organizer, and developed a number of pieces of widely used GNU software including the GNU Compiler Collection, the GNU Debugger, various tools in the GNU Core Utilities and the original Emacs editor.</p>
+
+            <p>Stallman pioneered the concept of copyleft, which uses the principles of copyright law as a contract to preserve the right to use, modify and distribute free software, and is the main author of free software licenses which describe those terms, most notably the GNU General Public License (GPL), the most widely used free software license.</p>
+
+            <p>With the launch of the GNU Project, he initiated the free software movement; in October 1985 he founded the Free Software Foundation. In 1989 he co-founded the League for Programming Freedom.</p>
+
+            <p>Since the mid-1990s, Stallman has spent most of his time advocating for free software, as well as campaigning against software patents, digital rights management, and what he sees as excessive extension of copyright laws.</p>
+            <!--[>TODO: stolen from wiki, probably we should provide the link to make it legal<]-->
+          </div>
+
+          <div id="lecture" class="tab-pane">
+            <a name="lecture"></a>
+            <h2> Lecture details </h2>
+            <!--[>TODO: fill in the details<]-->
+            <p>Proin eleifend feugiat commodo. Nunc rutrum elit ac urna auctor faucibus. Ut vitae magna ipsum. Vestibulum bibendum arcu et quam pellentesque in laoreet massa gravida. Pellentesque imperdiet nibh vel ligula luctus vitae aliquam lorem posuere. In et nulla a arcu fringilla volutpat. Aliquam hendrerit tempor lacus, eu auctor quam pharetra ac.</p>
+
+            <p>Quisque sed pharetra nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec vehicula sapien viverra erat sagittis ut iaculis nisi faucibus. Integer sit amet felis ac nulla dictum congue. Proin vehicula felis vel quam eleifend a sollicitudin lectus laoreet. Phasellus sed sagittis felis. Maecenas sem nibh, mollis quis interdum at, vehicula a dui. Duis quam dolor, tincidunt nec venenatis nec, pretium condimentum velit. Sed dictum nunc nec quam ullamcorper ac egestas quam molestie. Nunc et purus vel ante dictum tincidunt in sed nisi. Quisque in odio vel nisi aliquet fringilla.</p> 
+          </div>
+
+          <div id="registration" class="tab-pane">
+            <a name="registration"></a>
+            <h2> Registration (optional) </h2>
+            <!--[>todo: benefits of registration<]-->
+            <p>Proin eleifend feugiat commodo. Nunc rutrum elit ac urna auctor faucibus. Ut vitae magna ipsum. Vestibulum bibendum arcu et quam pellentesque in laoreet massa gravida. Pellentesque imperdiet nibh vel ligula luctus vitae aliquam lorem posuere. In et nulla a arcu fringilla volutpat. Aliquam hendrerit tempor lacus, eu auctor quam pharetra ac.</p>
+            <form action='/' class="form-horizontal" method='post'>
+              <div class="control-group">
+                <label class="control-label">Name:</label>
+                <input type='text' name='name' class="controls"><BR>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Surame:</label>
+                <input type='text' name='surname' class="controls"><BR>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Email:</label>
+                <input type='text' name='email' class="controls"><BR>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Enter text from image:</label>
+                {% raw captcha_img %}
+              </div>
+              <div class="control-group">
+                <label class="control-label"></label>
+                {% raw captcha_form %}
+              </div>
+
+              <div class="control-group">
+                <label class="control-label"></label>
+                <input class="btn btn-success controls" type='submit' value='Register' class="controls">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% end %}
 
-{% block footer %}
 
+
+{% block footer %}
+<div class="row">
+  <div class="span10 offset2 footer-content">
+    <p> Partnerzy: </p>
+    <img src="http://www.baza-firm.com.pl/firmy/7/71164/logo/71164_logo.gif" />
+    <img src="http://www.baza-firm.com.pl/firmy/7/71164/logo/71164_logo.gif" />
+    <img src="http://www.baza-firm.com.pl/firmy/7/71164/logo/71164_logo.gif" />
+    <img src="http://www.baza-firm.com.pl/firmy/7/71164/logo/71164_logo.gif" />
+    <img src="http://www.baza-firm.com.pl/firmy/7/71164/logo/71164_logo.gif" />
+  </div>
+</div>
 {% end %}
 
