@@ -7,6 +7,7 @@ import sys
 import tornado
 from tornado import web
 from tornado import ioloop
+from tornado import escape
 import tornado.httpserver
 import util
 import os
@@ -38,9 +39,12 @@ class MainHandler(web.RequestHandler):
       ''' % ( captchaId)
     cImg = captcha.GenerateImage(captchaId)
     last_img = cImg
-    self.render('index.html', captcha_img = captcha_img_html, captcha_form = captcha_form_html)
+    success = self.get_argument("success", None, True)
+    msg = escape.url_unescape(self.get_argument("msg", "", True))
+    self.render('index.html', captcha_img = captcha_img_html, captcha_form = captcha_form_html, success = success, msg = msg)
 
   def post(self):
+    success=False
     try:
       attendee = {
       'name': self.get_argument("name"),
@@ -51,13 +55,16 @@ class MainHandler(web.RequestHandler):
         fUserField = self.get_argument("fUserField")
         if captcha.Check( self.get_argument("fUserField"), self.get_argument("fCaptchaH") ):
           attendees.insert(attendee)
-          self.redirect("/register")
+          success=True
+          msg="Registration complete. Thank you."
         else:
           raise CaptchaException
       except:
-        self.write('<br> Incorrect captcha')
+        msg = "Incorrect captcha"
     except:
-      self.write('<br> Incomplete fields')
+      msg = "Please fill in all fields"
+    path = "/?success=%s&msg=%s" % (success, escape.url_escape(msg))
+    self.redirect(path, permanent=False)
 
 
 class CaptchaImageDispatcher(tornado.web.RequestHandler):

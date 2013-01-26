@@ -26,15 +26,21 @@ lol
       <div class="span7 tabbable main-page-content">
         <nav>
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#main" data-toggle="tab">Info</a></li>
+          <li class="{{ "active" if success is None else ""}}"><a href="#main" data-toggle="tab">Info</a></li>
           <li><a href="#bio" data-toggle="tab">Bio</a></li>
           <li><a href="#lecture" data-toggle="tab">Lecture</a></li>
-          <li><a href="#registration" data-toggle="tab">Register!</a></li>
+          <li class="{{ "active" if not(success is None) else ""}}"><a href="#registration" data-toggle="tab">Register!</a></li>
         </ul>
         </nav>
 
+        {% if not success == None %}
+        <div class="alert {{"alert-success" if success == "True" else "alert-error"}}">
+          {{msg}}
+          </div>
+        {% end %}
+
         <div class="tab-content">
-          <div id="main" class="tab-pane active">
+          <div id="main" class="tab-pane {{ "active" if success == None else ""}}">
             <a name="main"></a>
             <h2> Info </h2>
             <p>We are happy to announce, that Richard Stallman, the President of Free Software Foundation, pioneer of copyleft and free software, known for his work in <b>GNU</b>, <b>Emacs</b> and <b>GCC</b> visits Poland.
@@ -70,7 +76,7 @@ lol
             <p>Quisque sed pharetra nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec vehicula sapien viverra erat sagittis ut iaculis nisi faucibus. Integer sit amet felis ac nulla dictum congue. Proin vehicula felis vel quam eleifend a sollicitudin lectus laoreet. Phasellus sed sagittis felis. Maecenas sem nibh, mollis quis interdum at, vehicula a dui. Duis quam dolor, tincidunt nec venenatis nec, pretium condimentum velit. Sed dictum nunc nec quam ullamcorper ac egestas quam molestie. Nunc et purus vel ante dictum tincidunt in sed nisi. Quisque in odio vel nisi aliquet fringilla.</p> 
           </div>
 
-          <div id="registration" class="tab-pane">
+          <div id="registration" class="tab-pane {{ "active" if not(success is None) else ""}}">
             <a name="registration"></a>
             <h2> Registration (optional) </h2>
             <!--[>todo: benefits of registration<]-->
