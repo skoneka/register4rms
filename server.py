@@ -24,6 +24,7 @@ users = db.users
 class CaptchaException(Exception):
   pass
 
+
 class MainHandler(web.RequestHandler):
   def get(self):
     captchaId = captcha.GenerateID()
@@ -35,10 +36,10 @@ class MainHandler(web.RequestHandler):
     cImg = captcha.GenerateImage(captchaId)
     last_img = cImg
     self.render('index.html', captcha = captcha_html)
-  
+
   def post(self):
     try:
-      attendee = { 
+      attendee = {
       'name': self.get_argument("name"),
       'surname': self.get_argument("surname"),
       'email':  self.get_argument("email"),
@@ -55,11 +56,13 @@ class MainHandler(web.RequestHandler):
     except:
       self.write('<br> Incomplete fields')
 
+
 class CaptchaImageDispatcher(tornado.web.RequestHandler):
     def get(self):
       captchaId = self.get_argument('id')
       self.add_header("Content-Type", "image/png")
       self.write(captcha.GenerateImage(captchaId))
+
 
 class AdminHandler(web.RequestHandler):
   def get_current_user(self):
@@ -70,16 +73,16 @@ class AdminHandler(web.RequestHandler):
     a = db.attendees.find()
     self.render('admin.html', attendees = a)
 
+
 class LogoutHandler(web.RequestHandler):
   def get(self):
     self.clear_cookie("user")
     self.redirect('/login')
 
+
 class RegisterHandler(web.RequestHandler):
   def get(self):
     self.render('register.html')
-    
-
 
 
 class LoginHandler(MainHandler):
@@ -92,7 +95,6 @@ class LoginHandler(MainHandler):
       password = self.get_argument("pass")
     except:
       self.write('<br> Incomplete fields')
-      
     try:
       users = db.users.find({'username': username})
       user = next(users)
@@ -101,6 +103,7 @@ class LoginHandler(MainHandler):
         self.redirect("/admin")
     except StopIteration:
       self.redirect("/login")
+
 
 def main():
   application = tornado.web.Application (
