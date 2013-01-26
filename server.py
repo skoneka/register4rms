@@ -21,55 +21,45 @@ db = connection.register4rms
 attendees = db.attendees
 users = db.users
 
-last_img = None
-
 class CaptchaException(Exception):
   pass
 
 class MainHandler(web.RequestHandler):
-  global captchaId
-  captchaId = captcha.GenerateID()
-  captcha_html = '''
-              <img src="%s" />
-              What is the number: <input type="text" name="fUserField" />
-              <input type="hidden" name="fCaptchaH" value="%s" />
-              ''' % ("/a/captcha/?id="+captchaId, captchaId)
-
   def get(self):
-    global last_img
-    global captchaId
+    captchaId = captcha.GenerateID()
+    captcha_html = '''
+      <img src="%s" />
+      What is the number: <input type="text" name="fUserField" />
+      <input type="hidden" name="fCaptchaH" value="%s" />
+      ''' % ("/a/captcha/?id="+captchaId, captchaId)
     cImg = captcha.GenerateImage(captchaId)
     last_img = cImg
-    self.render('index.html', captcha = self.captcha_html)
+    self.render('index.html', captcha = captcha_html)
+  
+  def post(self):
+    try:
+      attendee = { 
+      'name': self.get_argument("name"),
+      'surname': self.get_argument("surname"),
+      'email':  self.get_argument("email"),
+      }
+      try:
+        fUserField = self.get_argument("fUserField")
+        if captcha.Check( self.get_argument("fUserField"), self.get_argument("fCaptchaH") ):
+          attendees.insert(attendee)
+          self.redirect("/register")
+        else:
+          raise CaptchaException
+      except:
+        self.write('<br> Incorrect captcha')
+    except:
+      self.write('<br> Incomplete fields')
 
-class MethodDispatcher(tornado.web.RequestHandler):
-    """
-    Subclasss this to have all of your class's methods exposed to the web
-    for both GET and POST requests.  Class methods that start with an
-    underscore (_) will be ignored.
-    """
-
-    def _dispatch(self):
-        """
-        Load up the requested URL if it matches one of our own methods.
-        Skip methods that start with an underscore (_).
-        """
-        args = None
-        ## Sanitize argument lists:
-        #if self.request.arguments:
-          #args = delist_arguments(self.request.arguments)
-        print(self.request.arguments)
+class CaptchaImageDispatcher(tornado.web.RequestHandler):
     def get(self):
-      global captchaId
-      self._dispatch()
+      captchaId = self.get_argument('id')
       self.add_header("Content-Type", "image/png")
       self.write(captcha.GenerateImage(captchaId))
-
-class CaptchaImageHandler(web.RequestHandler):
-  def get(self):
-    global last_img
-    self.add_header("Content-Type", "image/png")
-    self.write(last_img)
 
 class AdminHandler(web.RequestHandler):
   def get_current_user(self):
@@ -89,24 +79,7 @@ class RegisterHandler(web.RequestHandler):
   def get(self):
     self.render('register.html')
     
-  def post(self):
-    try:
-      attendee = { 
-      'name': self.get_argument("name"),
-      'surname': self.get_argument("surname"),
-      'email':  self.get_argument("email"),
-      }
-      try:
-        fUserField = self.get_argument("fUserField")
-        if captcha.Check( self.get_argument("fUserField"), self.get_argument("fCaptchaH") ):
-          attendees.insert(attendee)
-          self.redirect("/register")
-        else:
-          raise CaptchaException
-      except:
-        self.write('<br> Incorrect captcha')
-    except:
-      self.write('<br> Incomplete fields')
+
 
 
 class LoginHandler(MainHandler):
@@ -134,8 +107,7 @@ def main():
     [
     (r"/", MainHandler),
     (r"/login", LoginHandler),
-    (r"/i", CaptchaImageHandler),
-    (r"/a/captcha/.*", MethodDispatcher),
+    (r"/a/captcha/.*", CaptchaImageDispatcher),
     (r"/logout", LogoutHandler),
     (r"/admin", AdminHandler),
     (r"/register", RegisterHandler)

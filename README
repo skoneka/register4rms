@@ -13,6 +13,9 @@ register4rms
 
    # remember to set cookie_secret in server.py to a random value
    
+   # remember to set captchakey in lib/captcha.py to a random value (16 bytes)
+   captchakey = "SPAMMERSBESHOT!!";
+   
    # add an admin user
    ./add_user.py username password
    
