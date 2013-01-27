@@ -6,6 +6,57 @@ body {
   background-color: #7F8E95
 }
 
+/*header*/
+
+#header {
+  margin-bottom: 30px;
+}
+
+#header h1 {
+  text-align: right;
+  font-family: 'Montserrat Subrayada', sans-serif;
+  color: black;
+}
+
+
+/*navigation */
+
+nav .nav-tabs {
+  border-bottom: 1px solid #995F1F;
+}
+
+nav .nav-tabs > li {
+  margin-bottom: -2px;
+}
+
+nav .nav-tabs > li > a {
+  border-radius: 0px;
+  font-weight: bold;
+  color: black;
+  margin-right: 0px;
+  font-size: 130%;
+}
+
+nav .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+  border-width: 0px;
+  background-color: #995F1F;
+  color: #F2F3D8;
+}
+
+/*content*/
+
+.main-page-content {
+ width: 730px !important;
+ background-color: #E2C454;
+ min-height: 375px;
+ padding-bottom: 30px;
+ box-shadow: 2px 3px 3px #666666;
+}
+
+.form-horizontal .controls {
+  margin-left: 40px;
+}
+
 div#content aside {
   margin: 0px;
   box-shadow: 2px 3px 3px #666666;
@@ -22,43 +73,7 @@ div#content .main-page-content .tab-content {
 }
 
 
-#header {
-  margin-bottom: 30px;
-}
-
-#header h1 {
-  text-align: right;
-  font-family: 'Montserrat Subrayada', sans-serif;
-  color: black;
-}
-
-.form-horizontal .controls {
-  margin-left: 40px;
-}
-
-/*Overriding bootstrap tabs*/
-
-nav .nav-tabs > li > a {
-  border-radius: 0px;
-  font-weight: bold;
-  color: black;
-  margin-right: 0px;
-  font-size: 130%;
-}
-
-nav .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
-  border-width: 0px;
-  background-color: #995F1F;
-  color: #F2F3D8;
-}
-
-.main-page-content {
- width: 730px !important;
- background-color: #E2C454;
- min-height: 375px;
- padding-bottom: 30px;
- box-shadow: 2px 3px 3px #666666;
-}
+/*footer*/
 
 #footer span {
     background: none repeat scroll 0 0 #995F1F;
@@ -92,6 +107,3 @@ nav .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
   margin: 10px;
 }
 
-nav .nav-tabs {
-  border-bottom: 1px solid #995F1F;
-}
