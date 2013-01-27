@@ -1,10 +1,5 @@
 {% extends "base.html" %}
 
-
-{% block test %}
-lol
-{% end %}
-
 {% block header %}
 <div class="row">
   <div class="span10 offset2">
@@ -55,25 +50,32 @@ lol
           <div id="bio" class="tab-pane">
             <a name="bio"></a>
             <h2> Bio </h2>
-            <p>Richard Matthew Stallman (born March 16, 1953), often shortened to rms, is an American software freedom activist and computer programmer. He campaigns for the freedom to use, study, distribute and modify software; software that ensures these freedoms legally (via its license) is termed free software. Stallman opposes proprietary software which takes away a user's rights to exercise these freedoms through restrictive software license agreements, non-disclosure agreements, activation keys, dongles, copy restriction, proprietary formats and binary executables without source code and thus forces its users into a role of dependence on a company that seeks to control and monopolize the users and the market via these restrictions.</p>
-
-            <p>In September 1983, Stallman launched the GNU Project to create a Unix-like computer operating system composed entirely of free software. He has been the GNU project's lead architect and organizer, and developed a number of pieces of widely used GNU software including the GNU Compiler Collection, the GNU Debugger, various tools in the GNU Core Utilities and the original Emacs editor.</p>
-
-            <p>Stallman pioneered the concept of copyleft, which uses the principles of copyright law as a contract to preserve the right to use, modify and distribute free software, and is the main author of free software licenses which describe those terms, most notably the GNU General Public License (GPL), the most widely used free software license.</p>
-
-            <p>With the launch of the GNU Project, he initiated the free software movement; in October 1985 he founded the Free Software Foundation. In 1989 he co-founded the League for Programming Freedom.</p>
-
-            <p>Since the mid-1990s, Stallman has spent most of his time advocating for free software, as well as campaigning against software patents, digital rights management, and what he sees as excessive extension of copyright laws.</p>
-            <!--[>TODO: stolen from wiki, probably we should provide the link to make it legal<]-->
+            <p>Dr. Richard Stallman launched the free software movement in 1983 and
+            started the development of the GNU operating system (see <a href="http://www.gnu.org">www.gnu.org</a>)
+            in 1984.</p>
+            <p>GNU is free software: everyone has the freedom to copy it
+            and redistribute it, with or without changes.  The GNU/Linux system,
+            basically the GNU operating system with Linux added, is used on tens
+            of millions of computers today.</p>
+          <p>Stallman has received the ACM Grace
+            Hopper Award, a MacArthur Foundation fellowship, the Electronic
+            Frontier Foundation's Pioneer Award, and the the Takeda Award for
+            Social/Economic Betterment, as well as several honorary doctorates.</p>
           </div>
 
           <div id="lecture" class="tab-pane">
             <a name="lecture"></a>
             <h2> Lecture details </h2>
-            <!--[>TODO: fill in the details<]-->
-            <p>Proin eleifend feugiat commodo. Nunc rutrum elit ac urna auctor faucibus. Ut vitae magna ipsum. Vestibulum bibendum arcu et quam pellentesque in laoreet massa gravida. Pellentesque imperdiet nibh vel ligula luctus vitae aliquam lorem posuere. In et nulla a arcu fringilla volutpat. Aliquam hendrerit tempor lacus, eu auctor quam pharetra ac.</p>
-
-            <p>Quisque sed pharetra nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec vehicula sapien viverra erat sagittis ut iaculis nisi faucibus. Integer sit amet felis ac nulla dictum congue. Proin vehicula felis vel quam eleifend a sollicitudin lectus laoreet. Phasellus sed sagittis felis. Maecenas sem nibh, mollis quis interdum at, vehicula a dui. Duis quam dolor, tincidunt nec venenatis nec, pretium condimentum velit. Sed dictum nunc nec quam ullamcorper ac egestas quam molestie. Nunc et purus vel ante dictum tincidunt in sed nisi. Quisque in odio vel nisi aliquet fringilla.</p> 
+            <p>
+              Activities directed at "including" more people in the use of digital
+              technology are predicated on the assumption that such inclusion is
+              invariably a good thing.  It appears so, when judged solely by
+              immediate practical convenience.  However, if we also judge in terms
+              of human rights, whether digital inclusion is good or bad depends on
+              what kind of digital world we are to be included in.  If we wish to
+              work towards digital inclusion as a goal, it behooves us to make sure
+              it is the good kind.
+            </p>
           </div>
 
           <div id="registration" class="tab-pane {{ "active" if not(success is None) else ""}}">
