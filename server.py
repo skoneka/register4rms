@@ -10,6 +10,7 @@ from tornado import web
 from tornado import ioloop
 from tornado import escape
 import tornado.httpserver
+from tornado.web import HTTPError
 import util
 import os
 
@@ -46,12 +47,21 @@ class MainHandler(web.RequestHandler):
 
   def post(self):
     success=False
+    
+    try:
+      self.get_argument("kotiknews-events")
+      bKotikNews = True
+    except HTTPError:
+      bKotikNews = False
+      
     try:
       attendee = {
       'name': self.get_argument("name"),
       'surname': self.get_argument("surname"),
       'email':  self.get_argument("email"),
+      'kotiknews-events': bKotikNews,
       }
+      print(attendee)
       try:
         fUserField = self.get_argument("fUserField")
         if captcha.Check( self.get_argument("fUserField"), self.get_argument("fCaptchaH") ):
