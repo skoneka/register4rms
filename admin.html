@@ -8,9 +8,12 @@
 {% block content %}
 
 <ul>
-Name Surname Email
+Name Surname Email kotiknews-events
  {% for a in attendees %}
-     <li>{{ a['name'] }}  {{ a['surname'] }} {{ a['email'] }}</li>
+    {% try %}
+      <li>{{ a['name'] }}  {{ a['surname'] }} {{ a['email'] }} {{ a['kotiknews-events'] }}</li>
+    {% except%}
+    {% end %}
  {% end %}
  
 </ul>
