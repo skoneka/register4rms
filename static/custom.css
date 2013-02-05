@@ -101,6 +101,7 @@ div#content .main-page-content .tab-content {
   border-radius: 10px 10px 0 0;
   box-shadow: 2px 3px 3px #666666;
   padding-top: 10px;
+  text-align: center;
 }
 
 #footer .footer-content img {
