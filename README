@@ -5,11 +5,16 @@ register4rms
   virtualenv venv
   . venv/bin/activate
   pip install tornado
-  pip install pymongo 
-  # install mongodb from http://www.mongodb.org/ and start it  with
-  mongod
+  
+  # optional 
+    # if USE_MONGO in server.py is False than using sqlite3 instead
+    pip install pymongo 
+    # install mongodb from http://www.mongodb.org/ and start it  with
+    mongod
   
 *Configuration
+
+
 
    # remember to set cookie_secret in server.py to a random value
    
@@ -18,11 +23,14 @@ register4rms
    
    # `locate DejaVuSans` and set captchafont in lib/captcha.py
    captchafont = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'
-
-   
-   # add an admin user
-   ./add_user.py username password
-   
+    
+   #optional
+    # optional: to get /login and /admin pages to work set USE_mongo in server.py
+    USE_MONGO = True
+    
+    # optional: add an admin user
+    ./add_user.py username password
+    
 *Start*
 
   ./server.py 8000

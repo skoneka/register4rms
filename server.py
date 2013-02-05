@@ -4,6 +4,9 @@
 # author: Artur Skonecki
 # author: Barnaba Turek
 
+
+USE_MONGO = False # if False use sqlite3
+
 import sys
 import tornado
 from tornado import web
@@ -13,20 +16,33 @@ import tornado.httpserver
 from tornado.web import HTTPError
 import util
 import os
-
-from pymongo import MongoClient
-from pymongo.errors import ConnectionFailure
-
 import lib.captcha as captcha
 
-#import ipdb
-try:
-  connection = MongoClient('localhost', 27017)
-  db = connection.register4rms
-  attendees = db.attendees
-  users = db.users
-except ConnectionFailure:
-  print('MONGO ConnectionFailure FAILURE. Preview only.')
+if USE_MONGO:
+  try:
+    from pymongo import MongoClient
+    from pymongo.errors import ConnectionFailure
+  except ImportError:
+    print('pymongo not installed')
+    raise
+    
+  try:
+    connection = MongoClient('localhost', 27017)
+    db = connection.register4rms
+    attendees = db.attendees
+    users = db.users
+  except ConnectionFailure:
+    print('MONGO ConnectionFailure FAILURE.')
+    raise
+else:
+  import sqlite3
+
+  conn = sqlite3.connect('register4rms.db')
+  cursor = conn.cursor()
+  try:
+    cursor.execute('create table attendees ( name varchar(50), surname varchar(50), email varchar(50), kotiknewsevents  bool )')
+  except sqlite3.OperationalError:
+    pass
 	
 
 class CaptchaException(Exception):
@@ -63,13 +79,18 @@ class MainHandler(web.RequestHandler):
       'name': self.get_argument("name"),
       'surname': self.get_argument("surname"),
       'email':  self.get_argument("email"),
-      'kotiknews-events': bKotikNews,
+      'kotiknewsevents': bKotikNews,
       }
       print(attendee)
       try:
         fUserField = self.get_argument("fUserField")
         if captcha.Check( self.get_argument("fUserField"), self.get_argument("fCaptchaH") ):
-          attendees.insert(attendee)
+          if USE_MONGO:
+            attendees.insert(attendee)
+          else:
+            sql = '''insert into attendees values (:name, :surname, :email, :kotiknewsevents)'''
+            cursor.execute(sql, attendee)
+            conn.commit()
           success=True
           msg="Registration complete. Thank you."
         else:

@@ -29,7 +29,7 @@ import Image, ImageFont, ImageDraw, StringIO
 captchakey = "SPAMMERSBESHOT!!";
 #captchafont = "/usr/share/fonts/dejavu/DejaVuSans.ttf";
 captchafont = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'
-captchafont = '/usr/local/lib/X11/fonts/dejavu/DejaVuSans.ttf'
+#captchafont = '/usr/local/lib/X11/fonts/dejavu/DejaVuSans.ttf'
 
 def GenerateID():
 
