@@ -15,15 +15,19 @@ import util
 import os
 
 from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 
 import lib.captcha as captcha
 
 #import ipdb
-
-connection = MongoClient('localhost', 27017)
-db = connection.register4rms
-attendees = db.attendees
-users = db.users
+try:
+  connection = MongoClient('localhost', 27017)
+  db = connection.register4rms
+  attendees = db.attendees
+  users = db.users
+except ConnectionFailure:
+  print('MONGO ConnectionFailure FAILURE. Preview only.')
+	
 
 class CaptchaException(Exception):
   pass
